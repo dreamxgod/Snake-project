@@ -1,6 +1,6 @@
 ﻿namespace Snake_project
 {
-    partial class Form1
+    partial class MenuForm
     {
         /// <summary>
         /// Required designer variable.
@@ -57,7 +57,7 @@
             this.ScreenShotButton.Name = "ScreenShotButton";
             this.ScreenShotButton.Size = new System.Drawing.Size(146, 45);
             this.ScreenShotButton.TabIndex = 1;
-            this.ScreenShotButton.Text = "Screenshot";
+            this.ScreenShotButton.Text = "LeaderBoard";
             this.ScreenShotButton.UseVisualStyleBackColor = false;
             this.ScreenShotButton.Click += new System.EventHandler(this.TakeScreenshot);
             // 
