@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,7 @@ using System.Windows.Forms;
 
 namespace Snake_project
 {
-    public partial class Form1 : Form
+    public partial class MenuForm : Form
     {
         private List<Circle> Snake = new List<Circle>();
         private Circle food = new Circle();
@@ -21,11 +22,15 @@ namespace Snake_project
         int score;
         int highScore;
 
+        string username;
+
         Random rand = new Random();
 
         bool goLeft, goRight, goDown, goUp;
 
-        public Form1()
+        SqlConnection conn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=""C:\Users\Настенька\source\repos\Snake project\Snake project\Users.mdf"";Integrated Security=True");
+
+        public MenuForm()
         {
             InitializeComponent();
             new Settings();
@@ -78,7 +83,22 @@ namespace Snake_project
 
         private void GameOver()
         {
+            timer.Stop();
+            StartButton.Enabled = true;
 
+            if (score > highScore)
+            {
+                highScore = score;
+                username = "ivan";
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("INSERT INTO LeaderboardTable values (@username,@score)", conn);
+                cmd.Parameters.AddWithValue("@username", username);
+                cmd.Parameters.AddWithValue("@score", highScore);
+                conn.Close();
+                HighScore.Text = "High Score: " + Environment.NewLine + highScore;
+                HighScore.ForeColor = Color.Red;
+                
+            }
         }
 
         private void RestartGame()

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Snake_project
 {
-    internal class Circle
+    internal class Circle  // додвти клас змійки
     {
         public int X { get; set; }
         public int Y { get; set; }
